@@ -3,352 +3,49 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tejas HR — Backend Engineer</title>
-<meta name="description" content="Tejas HR — backend engineer in Bengaluru building FastAPI services, real-time pipelines and high-contention systems in Python." />
+<title>Jack -- 3D Creator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          geist: ['Geist', 'sans-serif'],
-        },
-      },
-    },
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { kanit: ['Kanit', 'sans-serif'] }
+    }
   }
+}
 </script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: #000;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body, #root, main {
+    background: #0C0C0C;
+    font-family: 'Kanit', sans-serif;
   }
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; overflow-x: clip; }
+  .hero-heading {
+    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 </style>
 </head>
-<body class="bg-black font-geist text-white">
-<div id="site" class="relative w-full overflow-x-hidden bg-black font-geist">
-
-  <section id="home" class="relative h-screen w-full overflow-hidden bg-black">
-    <video autoplay muted loop playsinline class="absolute inset-0 h-full w-full object-cover" style="object-position:70% center">
-      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_204221_5339e40b-e73d-4ab0-9c65-79c18c66fd50.mp4" type="video/mp4" />
-    </video>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent"></div>
-
-    <nav class="relative z-30 flex items-center justify-between px-6 py-5 md:px-12 lg:px-16">
-      <div class="flex items-center gap-8 lg:gap-12">
-        <a href="#home" class="text-lg font-semibold tracking-tight text-white sm:text-xl">Tejas HR</a>
-        <div class="hidden items-center gap-8 md:flex">
-          <a href="#about" class="text-sm text-white/80 transition-colors hover:text-white">About</a>
-          <a href="#stack" class="text-sm text-white/80 transition-colors hover:text-white">Stack</a>
-          <a href="#work" class="text-sm text-white/80 transition-colors hover:text-white">Work</a>
-          <a href="#experience" class="text-sm text-white/80 transition-colors hover:text-white">Experience</a>
-          <a href="#contact" class="text-sm text-white/80 transition-colors hover:text-white">Contact</a>
-        </div>
-      </div>
-      <a href="#contact" class="hidden rounded-lg bg-white px-5 py-2 text-sm font-medium text-black transition-transform hover:scale-105 md:inline-flex">Let's Talk</a>
-      <button id="menu-button" type="button" class="relative z-50 flex h-10 w-10 items-center justify-center text-white md:hidden active:scale-90" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <svg id="icon-menu" class="absolute h-6 w-6 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
-        <svg id="icon-close" class="absolute h-6 w-6 rotate-90 scale-0 opacity-0 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      </button>
-    </nav>
-
-    <div id="mobile-menu" class="absolute inset-x-0 top-0 z-20 h-0 overflow-hidden bg-black/98 opacity-0 pointer-events-none backdrop-blur-xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-      <div id="mobile-inner" class="flex h-full flex-col justify-center gap-5 px-8 translate-y-8 opacity-0 transition-all delay-100 duration-500">
-        <a href="#about" class="js-close text-3xl font-medium text-white/90 hover:text-white">About</a>
-        <a href="#stack" class="js-close text-3xl font-medium text-white/90 hover:text-white">Stack</a>
-        <a href="#work" class="js-close text-3xl font-medium text-white/90 hover:text-white">Work</a>
-        <a href="#experience" class="js-close text-3xl font-medium text-white/90 hover:text-white">Experience</a>
-        <a href="#contact" class="js-close text-3xl font-medium text-white/90 hover:text-white">Contact</a>
-        <a href="#contact" class="js-close mt-6 w-fit rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-transform hover:scale-105">Let's Talk</a>
-      </div>
-    </div>
-
-    <div class="relative z-10 flex h-[calc(100vh-80px)] flex-col justify-between px-6 pb-10 pt-12 sm:pb-12 sm:pt-16 md:px-12 md:pb-16 md:pt-20 lg:px-16">
-      <div class="max-w-3xl">
-        <p class="mb-4 animate-[fadeSlideUp_0.8s_ease_0.2s_both] text-xs text-white/90 sm:mb-6 sm:text-sm">Backend Engineer · Bengaluru</p>
-        <h1 class="animate-[fadeSlideUp_0.8s_ease_0.4s_both] text-3xl font-medium leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-          Building systems<br />that stay fast,<br />even under load.
-        </h1>
-      </div>
-      <div>
-        <p class="mb-5 max-w-sm animate-[fadeSlideUp_0.8s_ease_0.7s_both] text-sm leading-relaxed text-white/60 sm:mb-6 sm:max-w-lg sm:text-base md:text-lg">I build FastAPI services, normalised schemas, and indexes that turn multi-second queries into sub-200 ms responses.</p>
-        <a href="#work" class="inline-flex animate-[fadeSlideUp_0.8s_ease_0.9s_both] items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-medium text-black transition-transform hover:scale-105 sm:px-6 sm:py-3">
-          View Projects
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="bg-black px-6 py-24 md:px-12 md:py-32 lg:px-16">
-    <p class="mb-4 text-xs font-medium tracking-[0.18em] text-white/50 uppercase">01 — About</p>
-    <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-      <h2 class="text-3xl font-medium tracking-tight text-white sm:text-5xl">Who I am</h2>
-      <div class="max-w-2xl space-y-5 text-base leading-relaxed text-white/60 md:text-lg">
-        <p>I'm Tejas HR, an Information Science and Engineering graduate (2026) from The Oxford College of Engineering, Bengaluru. I work on the backend side of software — APIs, data models, and the parts of a system that decide whether it holds up under load.</p>
-        <p>Two full-stack internships taught me to ship inside a team: schema, endpoint, tests, and the JavaScript that consumes it. Since then I've been building backend systems on purpose-chosen hard problems — high-contention checkout, real-time location ingestion, and stream processing under backpressure — each with a design doc, load tests and honest numbers.</p>
-        <p>I'm strongest at API design, indexing, and debugging systems that are slow for non-obvious reasons. Looking for a backend or software engineering role in Bengaluru where I can own services end to end.</p>
-      </div>
-    </div>
-    <div class="mt-16 grid grid-cols-2 gap-4 md:grid-cols-4">
-      <div class="rounded-2xl border border-white/10 p-6"><p class="text-2xl font-medium text-white">Python</p><p class="mt-1 text-xs tracking-[0.14em] text-white/40 uppercase">Primary language</p></div>
-      <div class="rounded-2xl border border-white/10 p-6"><p class="text-2xl font-medium text-white">FastAPI</p><p class="mt-1 text-xs tracking-[0.14em] text-white/40 uppercase">Service framework</p></div>
-      <div class="rounded-2xl border border-white/10 p-6"><p class="text-2xl font-medium text-white">SQL</p><p class="mt-1 text-xs tracking-[0.14em] text-white/40 uppercase">MySQL · Postgres</p></div>
-      <div class="rounded-2xl border border-white/10 p-6"><p class="text-2xl font-medium text-white">Bengaluru</p><p class="mt-1 text-xs tracking-[0.14em] text-white/40 uppercase">Based in</p></div>
-    </div>
-  </section>
-
-  <section id="stack" class="bg-zinc-950 px-6 py-24 md:px-12 md:py-32 lg:px-16">
-    <p class="mb-4 text-xs font-medium tracking-[0.18em] text-white/50 uppercase">02 — Stack</p>
-    <h2 class="text-3xl font-medium tracking-tight text-white sm:text-5xl">What I work with</h2>
-    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="rounded-2xl border border-white/10 p-6">
-        <h3 class="mb-4 text-sm font-medium text-white">Languages</h3>
-        <div class="flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Python</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">SQL</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">JavaScript</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Java</span></div>
-      </div>
-      <div class="rounded-2xl border border-white/10 p-6">
-        <h3 class="mb-4 text-sm font-medium text-white">Backend &amp; APIs</h3>
-        <div class="flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">FastAPI</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Flask</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">REST</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Pydantic</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">OpenAPI</span></div>
-      </div>
-      <div class="rounded-2xl border border-white/10 p-6">
-        <h3 class="mb-4 text-sm font-medium text-white">Databases</h3>
-        <div class="flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">MySQL</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">PostgreSQL</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Redis</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Schema design</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Indexing</span></div>
-      </div>
-      <div class="rounded-2xl border border-white/10 p-6">
-        <h3 class="mb-4 text-sm font-medium text-white">Infra &amp; Tools</h3>
-        <div class="flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Docker</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Git</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Linux</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Postman</span></div>
-      </div>
-      <div class="rounded-2xl border border-white/10 p-6">
-        <h3 class="mb-4 text-sm font-medium text-white">Testing &amp; Load</h3>
-        <div class="flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Pytest</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">k6</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">Locust</span></div>
-      </div>
-      <div class="rounded-2xl border border-white/10 p-6">
-        <h3 class="mb-4 text-sm font-medium text-white">Fundamentals</h3>
-        <div class="flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">DSA</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">OOP</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">DBMS</span><span class="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">System design</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="work" class="bg-black px-6 py-24 md:px-12 md:py-32 lg:px-16">
-    <p class="mb-4 text-xs font-medium tracking-[0.18em] text-white/50 uppercase">03 — Selected work</p>
-    <h2 class="text-3xl font-medium tracking-tight text-white sm:text-5xl">Featured projects</h2>
-    <p class="mt-4 max-w-2xl text-white/60">Each project exists to hold one invariant under pressure. Design docs, ADRs and load-test results live in every repo.</p>
-
-    <article class="mt-16 grid items-start gap-10 border-t border-white/10 py-12 md:grid-cols-2">
-      <div>
-        <p class="text-xs tracking-[0.16em] text-white/40 uppercase">Project / 001</p>
-        <h3 class="mt-2 text-3xl font-medium tracking-tight text-white md:text-4xl">Surge</h3>
-        <p class="mt-2 text-xs tracking-[0.12em] text-white/40 uppercase">In progress</p>
-        <p class="mt-4 text-white/60">A flash-sale checkout engine built for the worst case: 1,000 units of inventory and 50,000 buyers arriving in three seconds. It holds four invariants — zero oversell, no double charge, every order reaches a terminal state, and the system degrades instead of collapsing.</p>
-        <p class="mt-3 text-white/60">Inventory is reserved through an atomic Redis Lua script, payments are made idempotent with stored-response replay, and failures unwind through saga compensations backed by a transactional outbox and a replayable dead-letter queue.</p>
-        <div class="mt-5 flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">FastAPI</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">PostgreSQL</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Redis Streams</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Docker</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">k6</span></div>
-        <a href="https://github.com/tejashr0716" class="mt-5 inline-flex text-sm font-medium text-white">View on GitHub ↗</a>
-      </div>
-      <div class="flex aspect-[16/10] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xs tracking-[0.2em] text-white/30 uppercase">Ops dashboard</div>
-    </article>
-
-    <article class="grid items-start gap-10 border-t border-white/10 py-12 md:grid-cols-2">
-      <div>
-        <p class="text-xs tracking-[0.16em] text-white/40 uppercase">Project / 002</p>
-        <h3 class="mt-2 text-3xl font-medium tracking-tight text-white md:text-4xl">Fleet</h3>
-        <p class="mt-2 text-xs tracking-[0.12em] text-white/40 uppercase">In progress</p>
-        <p class="mt-4 text-white/60">A real-time vehicle tracking platform: ingest thousands of GPS pings per second, answer nearest five vehicles in under 50 ms, and stream live positions to subscribers over WebSockets.</p>
-        <p class="mt-3 text-white/60">Positions are bucketed with H3 spatial indexing so proximity queries never scan the fleet, hot city cells are handled without stalling ingest, and slow subscribers get backpressure and dropped stale frames rather than unbounded buffers.</p>
-        <div class="mt-5 flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">FastAPI</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Redis</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">TimescaleDB</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">WebSockets</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">H3</span></div>
-        <a href="https://github.com/tejashr0716" class="mt-5 inline-flex text-sm font-medium text-white">View on GitHub ↗</a>
-      </div>
-      <div class="flex aspect-[16/10] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xs tracking-[0.2em] text-white/30 uppercase">Live map</div>
-    </article>
-
-    <article class="grid items-start gap-10 border-t border-white/10 py-12 md:grid-cols-2">
-      <div>
-        <p class="text-xs tracking-[0.16em] text-white/40 uppercase">Project / 003</p>
-        <h3 class="mt-2 text-3xl font-medium tracking-tight text-white md:text-4xl">Halt</h3>
-        <p class="mt-2 text-xs tracking-[0.12em] text-white/40 uppercase">In progress</p>
-        <p class="mt-4 text-white/60">A traffic-violation detection pipeline that stays healthy when inference is slower than ingest. Frames flow through a sampling stage into a pool of inference workers, with per-stage queue lag exposed as metrics.</p>
-        <p class="mt-3 text-white/60">The same vehicle is deduplicated across consecutive frames by plate hash and time window, and record generation is idempotent — replaying a stream produces byte-identical output instead of duplicate violations.</p>
-        <div class="mt-5 flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">FastAPI</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Redis Streams</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">OpenCV</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">ANPR</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Prometheus</span></div>
-        <a href="https://github.com/tejashr0716" class="mt-5 inline-flex text-sm font-medium text-white">View on GitHub ↗</a>
-      </div>
-      <div class="flex aspect-[16/10] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xs tracking-[0.2em] text-white/30 uppercase">Pipeline monitor</div>
-    </article>
-
-    <article class="grid items-start gap-10 border-t border-white/10 py-12 md:grid-cols-2">
-      <div>
-        <p class="text-xs tracking-[0.16em] text-white/40 uppercase">Project / 004</p>
-        <h3 class="mt-2 text-3xl font-medium tracking-tight text-white md:text-4xl">Tracekit</h3>
-        <p class="mt-2 text-xs tracking-[0.12em] text-emerald-400/80 uppercase">Shipped</p>
-        <p class="mt-4 text-white/60">A GPS map-matching engine that snaps noisy traces onto an OpenStreetMap road graph using a Hidden Markov Model with Viterbi decoding, reaching 90%+ segment accuracy.</p>
-        <p class="mt-3 text-white/60">Per-trace matching came down from seconds to under 200 ms by replacing full-table candidate scans with spatial indexing and a bounded candidate radius, served as a FastAPI service with a Leaflet tool for overlaying raw versus matched trajectories.</p>
-        <div class="mt-5 flex flex-wrap gap-2"><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Python</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">FastAPI</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">MySQL</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">NumPy</span><span class="rounded-full border border-white/10 px-3 py-1 text-[11px] tracking-wide text-white/60 uppercase">Leaflet</span></div>
-        <a href="https://github.com/tejashr0716" class="mt-5 inline-flex text-sm font-medium text-white">View on GitHub ↗</a>
-      </div>
-      <div class="flex aspect-[16/10] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-xs tracking-[0.2em] text-white/30 uppercase">Matched trace</div>
-    </article>
-  </section>
-
-  <section id="experience" class="bg-zinc-950 px-6 py-24 md:px-12 md:py-32 lg:px-16">
-    <p class="mb-4 text-xs font-medium tracking-[0.18em] text-white/50 uppercase">04 — Experience</p>
-    <h2 class="text-3xl font-medium tracking-tight text-white sm:text-5xl">Where I've worked</h2>
-    <div class="mt-12 space-y-12 border-l border-white/10 pl-6 md:pl-8">
-      <div>
-        <p class="text-xs tracking-[0.14em] text-white/40 uppercase">Aug 2026 — Present</p>
-        <h3 class="mt-2 text-xl font-medium text-white">Independent Projects</h3>
-        <p class="text-sm text-white/50">Bengaluru, India</p>
-        <ul class="mt-3 list-disc space-y-2 pl-5 text-white/60">
-          <li>Designing and building three backend systems focused on concurrency, real-time ingestion and pipeline reliability.</li>
-          <li>Publishing design docs, ADRs and load-test results for each, with measured p95/p99 latency and throughput.</li>
-        </ul>
-      </div>
-      <div>
-        <p class="text-xs tracking-[0.14em] text-white/40 uppercase">Jan 2026 — Jun 2026</p>
-        <h3 class="mt-2 text-xl font-medium text-white">Full Stack Developer Intern</h3>
-        <p class="text-sm text-white/50">KodNest Technologies Pvt Ltd · Bengaluru, India</p>
-        <ul class="mt-3 list-disc space-y-2 pl-5 text-white/60">
-          <li>Built and shipped FastAPI and Flask services backed by MySQL for internal application modules.</li>
-          <li>Designed normalised schemas and added composite indexes that cut the slowest list query substantially.</li>
-          <li>Delivered across two-week sprints with Git feature branches, peer code review and Pytest unit tests.</li>
-        </ul>
-      </div>
-      <div>
-        <p class="text-xs tracking-[0.14em] text-white/40 uppercase">Jul 2025 — Dec 2025</p>
-        <h3 class="mt-2 text-xl font-medium text-white">Web Developer Intern</h3>
-        <p class="text-sm text-white/50">SkillXAcademy · Bengaluru, India</p>
-        <ul class="mt-3 list-disc space-y-2 pl-5 text-white/60">
-          <li>Built data-driven UI modules in HTML5, CSS3 and JavaScript against FastAPI REST endpoints.</li>
-          <li>Profiled rendering in Chrome DevTools, removed blocking DOM work and redundant API calls to cut page load.</li>
-          <li>Standardised loading and error states across views, reducing reported UI defects.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="education" class="bg-black px-6 py-24 md:px-12 md:py-32 lg:px-16">
-    <p class="mb-4 text-xs font-medium tracking-[0.18em] text-white/50 uppercase">05 — Education</p>
-    <h2 class="text-3xl font-medium tracking-tight text-white sm:text-5xl">Where I studied</h2>
-    <div class="mt-12 grid gap-12 lg:grid-cols-2">
-      <div class="space-y-8">
-        <div>
-          <p class="text-xs tracking-[0.14em] text-white/40 uppercase">2022 — 2026</p>
-          <h3 class="mt-1 text-xl font-medium text-white">B.E. Information Science</h3>
-          <p class="text-white/50">The Oxford College of Engineering, Bengaluru · CGPA 8.3/10</p>
-        </div>
-        <div>
-          <p class="text-xs tracking-[0.14em] text-white/40 uppercase">2020 — 2022</p>
-          <h3 class="mt-1 text-xl font-medium text-white">Pre-University — PCMB</h3>
-          <p class="text-white/50">Vedantha PU College</p>
-        </div>
-        <div>
-          <p class="text-xs tracking-[0.14em] text-white/40 uppercase">2020</p>
-          <h3 class="mt-1 text-xl font-medium text-white">SSLC</h3>
-          <p class="text-white/50">Christ High School · 92%</p>
-        </div>
-      </div>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-2xl border border-white/10 p-5"><p class="font-medium text-white">Learn SQL Basics for Data Science</p><p class="mt-1 text-sm text-white/40">University of California, Davis</p></div>
-        <div class="rounded-2xl border border-white/10 p-5"><p class="font-medium text-white">Programming for Everybody</p><p class="mt-1 text-sm text-white/40">University of Michigan</p></div>
-        <div class="rounded-2xl border border-white/10 p-5"><p class="font-medium text-white">HTML5, CSS3 &amp; JavaScript</p><p class="mt-1 text-sm text-white/40">Coursera</p></div>
-        <div class="rounded-2xl border border-white/10 p-5"><p class="font-medium text-white">300+ DSA Problems</p><p class="mt-1 text-sm text-white/40">LeetCode · GeeksforGeeks</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="bg-zinc-950 px-6 py-24 md:px-12 md:py-32 lg:px-16">
-    <p class="mb-4 text-xs font-medium tracking-[0.18em] text-white/50 uppercase">06 — Contact</p>
-    <h2 class="text-3xl font-medium tracking-tight text-white sm:text-5xl">Let's talk</h2>
-    <div class="mt-12 grid gap-16 lg:grid-cols-2">
-      <form id="cf" novalidate class="space-y-8">
-        <div>
-          <label for="n" class="mb-2 block text-xs tracking-[0.14em] text-white/40 uppercase">Name</label>
-          <input id="n" name="name" type="text" autocomplete="name" required class="w-full border-0 border-b border-white/15 bg-transparent py-3 text-white outline-none focus:border-white" />
-          <p class="err mt-2 hidden text-sm text-red-400" data-for="n">Please enter your name.</p>
-        </div>
-        <div>
-          <label for="e" class="mb-2 block text-xs tracking-[0.14em] text-white/40 uppercase">Email</label>
-          <input id="e" name="email" type="email" autocomplete="email" required class="w-full border-0 border-b border-white/15 bg-transparent py-3 text-white outline-none focus:border-white" />
-          <p class="err mt-2 hidden text-sm text-red-400" data-for="e">Please enter a valid email address.</p>
-        </div>
-        <div>
-          <label for="m" class="mb-2 block text-xs tracking-[0.14em] text-white/40 uppercase">Message</label>
-          <textarea id="m" name="message" rows="4" required class="w-full resize-y border-0 border-b border-white/15 bg-transparent py-3 text-white outline-none focus:border-white"></textarea>
-          <p class="err mt-2 hidden text-sm text-red-400" data-for="m">Please add a short message.</p>
-        </div>
-        <button type="submit" class="rounded-lg bg-white px-6 py-3 text-sm font-medium text-black transition-transform hover:scale-105">Send message</button>
-      </form>
-      <div>
-        <p class="mb-8 max-w-sm text-white/60">Have a role, a project, or a question? Email is fastest — I reply the same day.</p>
-        <a href="mailto:tejashrise2026@gmail.com" class="flex items-center justify-between border-b border-white/10 py-4"><span class="text-xs tracking-[0.14em] text-white/40 uppercase">Email</span><span class="text-white">tejashrise2026@gmail.com</span></a>
-        <a href="https://github.com/tejashr0716" class="flex items-center justify-between border-b border-white/10 py-4"><span class="text-xs tracking-[0.14em] text-white/40 uppercase">GitHub</span><span class="text-white">github.com/tejashr0716</span></a>
-        <a href="https://linkedin.com/in/tejashr0716" class="flex items-center justify-between border-b border-white/10 py-4"><span class="text-xs tracking-[0.14em] text-white/40 uppercase">LinkedIn</span><span class="text-white">/in/tejashr0716</span></a>
-        <a href="https://leetcode.com/u/TejasHR2004" class="flex items-center justify-between border-b border-white/10 py-4"><span class="text-xs tracking-[0.14em] text-white/40 uppercase">LeetCode</span><span class="text-white">/u/TejasHR2004</span></a>
-        <a href="resume/tejas-hr-resume.pdf" class="mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-medium text-black transition-transform hover:scale-105">Download CV</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="flex items-center justify-between border-t border-white/10 px-6 py-6 text-sm text-white/40 md:px-12 lg:px-16">
-    <span>Tejas HR</span>
-    <span>Bengaluru, India</span>
-    <a href="#home" class="text-white/60 hover:text-white">Back to top</a>
-  </footer>
-</div>
-<script>
-(function () {
-  var button = document.getElementById('menu-button');
-  var menu = document.getElementById('mobile-menu');
-  var inner = document.getElementById('mobile-inner');
-  var iconMenu = document.getElementById('icon-menu');
-  var iconClose = document.getElementById('icon-close');
-  var open = false;
-  function render() {
-    button.setAttribute('aria-expanded', open ? 'true' : 'false');
-    button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    if (open) {
-      menu.classList.remove('h-0', 'opacity-0', 'pointer-events-none');
-      menu.classList.add('h-screen', 'opacity-100');
-      inner.classList.remove('translate-y-8', 'opacity-0');
-      inner.classList.add('translate-y-0', 'opacity-100');
-      iconMenu.classList.add('rotate-90', 'scale-0', 'opacity-0');
-      iconClose.classList.remove('rotate-90', 'scale-0', 'opacity-0');
-    } else {
-      menu.classList.add('h-0', 'opacity-0', 'pointer-events-none');
-      menu.classList.remove('h-screen', 'opacity-100');
-      inner.classList.add('translate-y-8', 'opacity-0');
-      inner.classList.remove('translate-y-0', 'opacity-100');
-      iconMenu.classList.remove('rotate-90', 'scale-0', 'opacity-0');
-      iconClose.classList.add('rotate-90', 'scale-0', 'opacity-0');
-    }
-  }
-  button.addEventListener('click', function () { open = !open; render(); });
-  menu.querySelectorAll('.js-close').forEach(function (a) {
-    a.addEventListener('click', function () { open = false; render(); });
-  });
-  var cf = document.getElementById('cf');
-  cf.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var ok = true;
-    var show = function (id, bad) {
-      var el = document.querySelector('.err[data-for="' + id + '"]');
-      el.classList.toggle('hidden', !bad);
-      if (bad) ok = false;
-    };
-    var n = cf.name.value.trim(), em = cf.email.value.trim(), m = cf.message.value.trim();
-    show('n', !n);
-    show('e', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em));
-    show('m', m.length < 5);
-    if (!ok) return;
-    location.href = 'mailto:tejashrise2026@gmail.com?subject=' + encodeURIComponent('Portfolio enquiry — ' + n) + '&body=' + encodeURIComponent(m + '\n\n— ' + n + ' (' + em + ')');
-  });
-})();
-</script>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/framer-motion@11.18.2/dist/framer-motion.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.26.10/babel.min.js"></script>
+<script type="text/babel" data-presets="react" src="boot.js"></script>
+<script type="text/babel" data-presets="react" src="components.js"></script>
+<script type="text/babel" data-presets="react" src="hero.js"></script>
+<script type="text/babel" data-presets="react" src="marquee.js"></script>
+<script type="text/babel" data-presets="react" src="about.js"></script>
+<script type="text/babel" data-presets="react" src="services.js"></script>
+<script type="text/babel" data-presets="react" src="projects.js"></script>
+<script type="text/babel" data-presets="react" src="app.js"></script>
 </body>
 </html>
