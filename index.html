@@ -42,21 +42,22 @@ tailwind.config = {
 <script>
 (function () {
   var files = ['boot.js', 'components.js', 'hero.js', 'marquee.js', 'about.js', 'services.js', 'projects.js', 'app.js'];
+  function fail(file, err) {
+    console.error('Failed to load', file, err);
+  }
   function runNext(i) {
     if (i >= files.length) return;
-    fetch(files[i] + '?v=jack-20261001c', { cache: 'no-store' })
+    fetch(files[i] + '?v=jack-20261001d', { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + files[i]);
         return r.text();
       })
       .then(function (code) {
         var out = Babel.transform(code, { presets: ['react'], filename: files[i] }).code;
-        (0, eval)(out);
+        (new Function(out))();
         runNext(i + 1);
       })
-      .catch(function (err) {
-        console.error('Failed to load', files[i], err);
-      });
+      .catch(function (err) { fail(files[i], err); });
   }
   runNext(0);
 })();
