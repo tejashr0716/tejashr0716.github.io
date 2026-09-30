@@ -1,3 +1,7 @@
+const FadeIn = window.FadeIn;
+const AnimatedText = window.AnimatedText;
+const ContactButton = window.ContactButton;
+
 function AboutSection() {
   const paragraphText = 'With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let\u2019s build something incredible together!';
   return (
@@ -40,3 +44,4 @@ function AboutSection() {
     </section>
   );
 }
+window.AboutSection = AboutSection;

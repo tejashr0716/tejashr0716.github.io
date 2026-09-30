@@ -1,3 +1,7 @@
+const useState = window.useState;
+const useEffect = window.useEffect;
+const useRef = window.useRef;
+
 const ROW1 = [
   'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
   'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
@@ -71,3 +75,4 @@ function MarqueeSection() {
     </section>
   );
 }
+window.MarqueeSection = MarqueeSection;

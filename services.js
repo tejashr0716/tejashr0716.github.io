@@ -1,3 +1,5 @@
+const FadeIn = window.FadeIn;
+
 const SERVICES = [
   { number: '01', title: '3D Modeling', desc: 'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.' },
   { number: '02', title: 'Rendering', desc: 'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.' },
@@ -45,3 +47,4 @@ function ServicesSection() {
     </section>
   );
 }
+window.ServicesSection = ServicesSection;
