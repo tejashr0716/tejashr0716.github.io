@@ -1,3 +1,7 @@
+const FadeIn = window.FadeIn;
+const Magnet = window.Magnet;
+const ContactButton = window.ContactButton;
+
 function HeroSection() {
   const handleNavClick = (ev, targetId) => {
     ev.preventDefault();
@@ -47,3 +51,4 @@ function HeroSection() {
     </section>
   );
 }
+window.HeroSection = HeroSection;

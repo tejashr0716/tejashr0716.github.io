@@ -1,3 +1,11 @@
+const useState = window.useState;
+const useEffect = window.useEffect;
+const useRef = window.useRef;
+const motion = window.motion;
+const useScroll = window.useScroll;
+const useTransform = window.useTransform;
+const motionTag = window.motionTag;
+
 function FadeIn({ children, delay = 0, duration = 0.7, x = 0, y = 30, as = 'div', className = '', id, style }) {
   const Comp = motionTag(as);
   return (
@@ -134,3 +142,9 @@ function LiveProjectButton({ className = '', href }) {
   }
   return <button type="button" className={cls}>Live Project</button>;
 }
+
+window.FadeIn = FadeIn;
+window.Magnet = Magnet;
+window.AnimatedText = AnimatedText;
+window.ContactButton = ContactButton;
+window.LiveProjectButton = LiveProjectButton;
