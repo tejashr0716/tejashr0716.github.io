@@ -39,13 +39,27 @@ tailwind.config = {
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/framer-motion@11.18.2/dist/framer-motion.js"></script>
 <script src="https://unpkg.com/@babel/standalone@7.26.10/babel.min.js"></script>
-<script type="text/babel" data-presets="react" src="boot.js"></script>
-<script type="text/babel" data-presets="react" src="components.js"></script>
-<script type="text/babel" data-presets="react" src="hero.js"></script>
-<script type="text/babel" data-presets="react" src="marquee.js"></script>
-<script type="text/babel" data-presets="react" src="about.js"></script>
-<script type="text/babel" data-presets="react" src="services.js"></script>
-<script type="text/babel" data-presets="react" src="projects.js"></script>
-<script type="text/babel" data-presets="react" src="app.js"></script>
+<script>
+(function () {
+  var files = ['boot.js', 'components.js', 'hero.js', 'marquee.js', 'about.js', 'services.js', 'projects.js', 'app.js'];
+  function runNext(i) {
+    if (i >= files.length) return;
+    fetch(files[i] + '?v=jack-20261001c', { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + files[i]);
+        return r.text();
+      })
+      .then(function (code) {
+        var out = Babel.transform(code, { presets: ['react'], filename: files[i] }).code;
+        (0, eval)(out);
+        runNext(i + 1);
+      })
+      .catch(function (err) {
+        console.error('Failed to load', files[i], err);
+      });
+  }
+  runNext(0);
+})();
+</script>
 </body>
 </html>

@@ -1,3 +1,10 @@
+const useRef = window.useRef;
+const useScroll = window.useScroll;
+const useTransform = window.useTransform;
+const motion = window.motion;
+const FadeIn = window.FadeIn;
+const LiveProjectButton = window.LiveProjectButton;
+
 const PROJECTS = [
   {
     id: 'p1', number: '01', name: 'Nextlevel Studio', category: 'Client',
@@ -82,3 +89,4 @@ function ProjectsSection() {
     </section>
   );
 }
+window.ProjectsSection = ProjectsSection;
