@@ -1,11 +1,11 @@
 const FadeIn = window.FadeIn;
 
 const SERVICES = [
-  { number: '01', title: '3D Modeling', desc: 'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.' },
-  { number: '02', title: 'Rendering', desc: 'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.' },
-  { number: '03', title: 'Motion Design', desc: 'Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.' },
-  { number: '04', title: 'Branding', desc: 'Crafting cohesive visual identities -- from logos to full brand systems -- that communicate a clear and memorable presence.' },
-  { number: '05', title: 'Web Design', desc: 'Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.' },
+  { number: '01', title: 'Python', desc: 'Primary language for backend services, scripting, data work, and interview-ready problem solving.' },
+  { number: '02', title: 'REST APIs', desc: 'FastAPI and Flask endpoints with Pydantic validation, JWT auth, OpenAPI docs, and clear error handling.' },
+  { number: '03', title: 'Databases', desc: 'MySQL, PostgreSQL, and Redis -- schema design, indexing, transactions, and query performance.' },
+  { number: '04', title: 'Real-Time Systems', desc: 'WebSockets, GPS telemetry, SSE live updates, and dashboards that stay honest about what is live vs simulated.' },
+  { number: '05', title: 'Testing and Infra', desc: 'Pytest, Docker Compose, Git, and measured benchmarks -- numbers from runs, not guesses.' },
 ];
 
 function ServicesSection() {
@@ -14,7 +14,7 @@ function ServicesSection() {
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         <FadeIn delay={0} y={40}>
           <h2 className="text-[#0C0C0C] font-black uppercase text-center select-none mb-16 sm:mb-20 md:mb-28 leading-none" style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}>
-            Services
+            Skills
           </h2>
         </FadeIn>
         <div className="w-full flex flex-col">

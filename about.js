@@ -3,7 +3,7 @@ const AnimatedText = window.AnimatedText;
 const ContactButton = window.ContactButton;
 
 function AboutSection() {
-  const paragraphText = 'With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let\u2019s build something incredible together!';
+  const paragraphText = 'I am Tejas HR, a Python backend developer in Bengaluru. I build FastAPI services, REST APIs, and real-time telemetry systems, with a focus on data modelling, request validation, and database performance. Open to entry-level backend roles. Let\u2019s build something reliable together!';
   return (
     <section id="about" className="relative min-h-screen w-full flex flex-col items-center justify-center bg-[#0C0C0C] py-20 px-5 sm:px-8 md:px-10 overflow-hidden">
       <div className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-0 pointer-events-none">
@@ -35,9 +35,17 @@ function AboutSection() {
         <div className="mt-10 sm:mt-14 md:mt-16 w-full px-4 flex justify-center">
           <AnimatedText text={paragraphText} className="text-[#D7E2EA] font-medium leading-relaxed max-w-[560px] text-[clamp(1rem,2vw,1.35rem)]" />
         </div>
-        <div id="contact" className="mt-16 sm:mt-20 md:mt-24">
+        <div id="contact" className="mt-16 sm:mt-20 md:mt-24 flex flex-col items-center gap-6">
           <FadeIn delay={0.2} y={30}>
             <ContactButton />
+          </FadeIn>
+          <FadeIn delay={0.3} y={20}>
+            <div className="flex flex-wrap justify-center gap-5 sm:gap-8 text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm">
+              <a href="mailto:tejashrise2026@gmail.com" className="hover:opacity-70 transition-opacity">Email</a>
+              <a href="https://github.com/tejashr0716" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">GitHub</a>
+              <a href="https://www.linkedin.com/in/tejashr0716/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
+              <a href="https://leetcode.com/u/TejasHR2004" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LeetCode</a>
+            </div>
           </FadeIn>
         </div>
       </div>
