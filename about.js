@@ -3,7 +3,7 @@ const AnimatedText = window.AnimatedText;
 const ContactButton = window.ContactButton;
 
 function AboutSection() {
-  const paragraphText = 'I am Tejas HR, a Python backend developer in Bengaluru. I build FastAPI services, REST APIs, and real-time telemetry systems, with a focus on data modelling, request validation, and database performance. Open to entry-level backend roles. Let\u2019s build something reliable together!';
+  const paragraphText = 'I am Tejas HR, a B.E. Information Science and Engineering graduate from The Oxford College of Engineering (CGPA 8.08/10). Across two internships I developed, tested, debugged and maintained REST APIs and web applications using FastAPI, Flask, MySQL, HTML5, CSS3 and JavaScript. Seeking an entry-level Software Engineer role.';
   return (
     <section id="about" className="relative min-h-screen w-full flex flex-col items-center justify-center bg-[#0C0C0C] py-20 px-5 sm:px-8 md:px-10 overflow-hidden">
       <div className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-0 pointer-events-none">
@@ -44,7 +44,8 @@ function AboutSection() {
               <a href="mailto:tejashrise2026@gmail.com" className="hover:opacity-70 transition-opacity">Email</a>
               <a href="https://github.com/tejashr0716" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">GitHub</a>
               <a href="https://www.linkedin.com/in/tejashr0716/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LinkedIn</a>
-              <a href="https://leetcode.com/u/TejasHR2004" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LeetCode</a>
+              <a href="https://leetcode.com/u/tejashr0716/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">LeetCode</a>
+              <a href="https://www.geeksforgeeks.org/profile/tejashr0716" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">GFG</a>
             </div>
           </FadeIn>
         </div>

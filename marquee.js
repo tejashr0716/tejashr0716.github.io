@@ -3,18 +3,16 @@ const useEffect = window.useEffect;
 const useRef = window.useRef;
 
 const ROW1 = [
-  { k: 'Project', t: 'Fleet Tracking', s: 'FastAPI  PostgreSQL  Redis  WebSockets', href: 'https://tejashr0716.github.io/fleet/', bg: 'linear-gradient(160deg, #082018 0%, #0f3d32 45%, #0C0C0C 100%)' },
-  { k: 'Project', t: 'Flash Market', s: 'FastAPI  MySQL  Inventory API', href: 'https://github.com/tejashr0716/flashmarket', bg: 'linear-gradient(160deg, #1a1208 0%, #3d2a12 45%, #0C0C0C 100%)' },
-  { k: 'Project', t: 'PCA Reduction', s: 'Python  Flask  NumPy', href: 'https://github.com/tejashr0716/pca-dimension-reduction', bg: 'linear-gradient(160deg, #101018 0%, #2a2450 45%, #0C0C0C 100%)' },
-  { k: 'Project', t: 'Employee System', s: 'Python  Flask  Oracle SQL', href: 'https://github.com/tejashr0716/enterprise-employee-management-system', bg: 'linear-gradient(160deg, #081018 0%, #12344a 45%, #0C0C0C 100%)' },
-  { k: 'Project', t: 'Drug Interaction', s: 'Python  Flask  Oracle SQL', href: 'https://github.com/tejashr0716/automated-drug-interaction', bg: 'linear-gradient(160deg, #180818 0%, #3a1240 45%, #0C0C0C 100%)' },
+  { k: 'Project  May 2026 -- Jul 2026', t: 'Flash Market', s: 'Python  FastAPI  MySQL  REST  JavaScript', href: 'https://github.com/tejashr0716/flashmarket', bg: 'linear-gradient(160deg, #1a1208 0%, #3d2a12 45%, #0C0C0C 100%)' },
+  { k: 'Project  Jan 2026 -- Feb 2026', t: 'Fleet Tracking', s: 'Python  FastAPI  PostgreSQL  Redis  REST', href: 'https://github.com/tejashr0716/fleet', bg: 'linear-gradient(160deg, #082018 0%, #0f3d32 45%, #0C0C0C 100%)' },
+  { k: 'Project  Nov 2025 -- Dec 2025', t: 'PCA Reduction', s: 'Python  NumPy  pandas  scikit-learn  Matplotlib', href: 'https://github.com/tejashr0716/pca-dimension-reduction', bg: 'linear-gradient(160deg, #101018 0%, #2a2450 45%, #0C0C0C 100%)' },
 ];
 const ROW2 = [
-  { k: 'Course', t: 'SQL for Data Science', s: 'University of California, Davis', href: '', bg: 'linear-gradient(160deg, #08141c 0%, #1a3d55 45%, #0C0C0C 100%)' },
-  { k: 'Course', t: 'Programming for Everybody', s: 'University of Michigan', href: '', bg: 'linear-gradient(160deg, #1c1008 0%, #5a3210 45%, #0C0C0C 100%)' },
-  { k: 'Course', t: 'HTML CSS JavaScript', s: 'Coursera', href: '', bg: 'linear-gradient(160deg, #0c1410 0%, #1e3d28 45%, #0C0C0C 100%)' },
-  { k: 'Course', t: '300+ DSA Problems', s: 'LeetCode  GeeksforGeeks', href: 'https://leetcode.com/u/TejasHR2004', bg: 'linear-gradient(160deg, #141408 0%, #3d3a10 45%, #0C0C0C 100%)' },
-  { k: 'Education', t: 'B.E. Information Science', s: 'Oxford College of Engineering  2022-2026', href: '', bg: 'linear-gradient(160deg, #100814 0%, #2c1a40 45%, #0C0C0C 100%)' },
+  { k: 'Certification', t: 'SQL Basics for Data Science', s: 'UC Davis  Coursera', href: '', bg: 'linear-gradient(160deg, #08141c 0%, #1a3d55 45%, #0C0C0C 100%)' },
+  { k: 'Certification', t: 'IBM DevOps and Software Engineering', s: 'IBM  Coursera', href: '', bg: 'linear-gradient(160deg, #1c1008 0%, #5a3210 45%, #0C0C0C 100%)' },
+  { k: 'Certification', t: 'Data Analysis Using Python', s: 'Google  Coursera', href: '', bg: 'linear-gradient(160deg, #0c1410 0%, #1e3d28 45%, #0C0C0C 100%)' },
+  { k: 'Certification', t: 'HTML5, CSS3, and JavaScript', s: 'IBM  Coursera', href: '', bg: 'linear-gradient(160deg, #141408 0%, #3d3a10 45%, #0C0C0C 100%)' },
+  { k: 'Education  2022 -- 2026', t: 'B.E. Information Science', s: 'The Oxford College of Engineering  CGPA 8.08/10', href: '', bg: 'linear-gradient(160deg, #100814 0%, #2c1a40 45%, #0C0C0C 100%)' },
 ];
 
 function WorkCard({ item }) {

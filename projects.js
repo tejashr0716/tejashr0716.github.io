@@ -6,23 +6,23 @@ const FadeIn = window.FadeIn;
 
 const INTERNS = [
   {
-    id: 'i1', number: '01', role: 'Full Stack Developer Intern', company: 'KodNest Technologies',
-    dates: 'Jan 2026 -- Jun 2026', place: 'Bengaluru',
-    stack: 'FastAPI  Flask  MySQL  Pytest',
+    id: 'i1', number: '01', role: 'Full Stack Developer Intern', company: 'KodNest Technologies Pvt Ltd',
+    dates: 'Feb 2026 -- Aug 2026', place: 'Bangalore',
+    stack: 'FastAPI  Flask  MySQL  Git',
     points: [
-      'Built and shipped FastAPI and Flask services backed by MySQL for internal modules.',
-      'Designed normalised schemas and added composite indexes on slow list queries.',
-      'Delivered in two-week sprints with Git feature branches, review, and Pytest.',
+      'Developed 8 Python REST endpoints with FastAPI over MySQL across 3 internal modules, covering request handling, data processing, and integration with existing database tables.',
+      'Cut report generation time 85%, from 4s to 0.6s, by profiling slow MySQL queries and adding 3 targeted indexes.',
+      'Worked through 12 two-week sprints, delivering each assigned change on its own Git feature branch.',
     ],
   },
   {
     id: 'i2', number: '02', role: 'Web Developer Intern', company: 'SkillXAcademy',
-    dates: 'Jul 2025 -- Dec 2025', place: 'Bengaluru',
-    stack: 'HTML  CSS  JavaScript  FastAPI',
+    dates: 'Oct 2025 -- Jan 2026', place: 'Bangalore',
+    stack: 'HTML5  CSS3  JavaScript  REST',
     points: [
-      'Built data-driven UI modules in HTML, CSS, and JavaScript on FastAPI REST endpoints.',
-      'Profiled rendering in Chrome DevTools and removed redundant API calls.',
-      'Standardised loading and error states across views.',
+      'Built 6 responsive, data-driven interfaces in HTML5, CSS3, and vanilla JavaScript, consuming 5 REST endpoints and rendering paginated JSON into live listing and detail views.',
+      'Reduced product-page load time 40%, from 2.5s to 1.5s, by profiling in Chrome DevTools, removing blocking DOM work and duplicate API calls, and batching renders with cached fetch responses.',
+      'Tested and corrected rendering across Chrome and Firefox down to 320px viewports, resolving 14 layout and cross-browser defects.',
     ],
   },
 ];
@@ -55,7 +55,7 @@ function InternCard({ item, index, totalCards }) {
           </div>
         </div>
         <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-[#D7E2EA]/50">{item.stack}</p>
-        <ul className="flex flex-col gap-3 sm:gap-4 text-[#D7E2EA] font-light leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.35rem)' }}>
+        <ul className="flex flex-col gap-3 sm:gap-4 text-[#D7E2EA] font-light leading-relaxed" style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.2rem)' }}>
           {item.points.map(function (pt) {
             return <li key={pt} className="border-t border-[#D7E2EA]/15 pt-3 sm:pt-4">{pt}</li>;
           })}

@@ -1,11 +1,11 @@
 const FadeIn = window.FadeIn;
 
 const SERVICES = [
-  { number: '01', title: 'Python', desc: 'Primary language for backend services, scripting, data work, and interview-ready problem solving.' },
-  { number: '02', title: 'REST APIs', desc: 'FastAPI and Flask endpoints with Pydantic validation, JWT auth, OpenAPI docs, and clear error handling.' },
-  { number: '03', title: 'Databases', desc: 'MySQL, PostgreSQL, and Redis -- schema design, indexing, transactions, and query performance.' },
-  { number: '04', title: 'Real-Time Systems', desc: 'WebSockets, GPS telemetry, SSE live updates, and dashboards that stay honest about what is live vs simulated.' },
-  { number: '05', title: 'Testing and Infra', desc: 'Pytest, Docker Compose, Git, and measured benchmarks -- numbers from runs, not guesses.' },
+  { number: '01', title: 'Languages', desc: 'Python, SQL, Java, and JavaScript, with DSA, OOPS, and DBMS fundamentals.' },
+  { number: '02', title: 'Backend and APIs', desc: 'FastAPI, Flask, Django, Node.js, Express.js, and REST APIs from internships and projects.' },
+  { number: '03', title: 'Databases', desc: 'MySQL, PostgreSQL, and Redis for schema work, indexing, and caching.' },
+  { number: '04', title: 'Frontend', desc: 'HTML5, CSS3, React.js, and vanilla JavaScript for data-driven interfaces.' },
+  { number: '05', title: 'Tools and Testing', desc: 'Git, GitHub Actions, Docker, Postman, and pytest. NumPy, pandas, scikit-learn, Matplotlib.' },
 ];
 
 function ServicesSection() {

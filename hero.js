@@ -41,7 +41,7 @@ function HeroSection() {
       <div className="mt-auto w-full flex justify-between items-end pb-7 sm:pb-8 md:pb-10 px-6 md:px-10 z-20">
         <FadeIn delay={0.35} y={20} className="max-w-[180px] sm:max-w-[240px] md:max-w-[300px]">
           <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug" style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}>
-            a python backend developer driven by building fast apis and real-time systems
+            a software engineer in bangalore seeking an entry-level role
           </p>
         </FadeIn>
         <FadeIn delay={0.5} y={20}>
