@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jack -- 3D Creator</title>
+<title>Tejas HR -- Backend Engineer</title>
+<meta name="description" content="Tejas HR -- Python backend developer in Bengaluru. FastAPI, REST APIs, and real-time telemetry." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -47,7 +48,7 @@ tailwind.config = {
   }
   function runNext(i) {
     if (i >= files.length) return;
-    fetch(files[i] + '?v=jack-20261001d', { cache: 'no-store' })
+    fetch(files[i] + '?v=tejas-20261001a', { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + files[i]);
         return r.text();
