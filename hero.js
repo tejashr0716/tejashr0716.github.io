@@ -13,8 +13,8 @@ function HeroSection() {
     <section className="relative h-screen w-full flex flex-col overflow-x-clip bg-[#0C0C0C]">
       <FadeIn as="nav" delay={0} y={-20} className="w-full flex justify-between items-center px-6 md:px-10 pt-6 md:pt-8 z-30">
         <a href="#about" onClick={(ev) => handleNavClick(ev, 'about')} className={navCls}>About</a>
-        <a href="#services" onClick={(ev) => handleNavClick(ev, 'services')} className={navCls}>Skills</a>
-        <a href="#projects" onClick={(ev) => handleNavClick(ev, 'projects')} className={navCls}>Projects</a>
+        <a href="#work" onClick={(ev) => handleNavClick(ev, 'work')} className={navCls}>Work</a>
+        <a href="#internships" onClick={(ev) => handleNavClick(ev, 'internships')} className={navCls}>Intern</a>
         <a href="#contact" onClick={(ev) => handleNavClick(ev, 'contact')} className={navCls}>Contact</a>
       </FadeIn>
 

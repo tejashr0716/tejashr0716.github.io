@@ -48,7 +48,7 @@ tailwind.config = {
   }
   function runNext(i) {
     if (i >= files.length) return;
-    fetch(files[i] + '?v=tejas-20261001a', { cache: 'no-store' })
+    fetch(files[i] + '?v=tejas-20261001c', { cache: 'no-store' })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + files[i]);
         return r.text();
