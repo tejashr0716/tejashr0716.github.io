@@ -9,6 +9,8 @@ const INTERNS = [
     id: 'i1', number: '01', role: 'Full Stack Developer Intern', company: 'KodNest Technologies Pvt Ltd',
     dates: 'Feb 2026 -- Aug 2026', place: 'Bangalore',
     stack: 'FastAPI  Flask  MySQL  Git',
+    demo: 'https://tejashr0716.github.io/opsdesk/',
+    github: 'https://github.com/tejashr0716/opsdesk',
     points: [
       'Developed 8 Python REST endpoints with FastAPI over MySQL across 3 internal modules, covering request handling, data processing, and integration with existing database tables.',
       'Cut report generation time 85%, from 4s to 0.6s, by profiling slow MySQL queries and adding 3 targeted indexes.',
@@ -55,6 +57,15 @@ function InternCard({ item, index, totalCards }) {
           </div>
         </div>
         <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-[#D7E2EA]/50">{item.stack}</p>
+        {item.demo ? (
+          <div className="flex flex-col gap-2">
+            <p className="text-xs font-light uppercase tracking-wider text-[#D7E2EA]/50">Public reconstruction of this intern work, not the company repo</p>
+            <div className="flex gap-6 text-xs sm:text-sm font-medium uppercase tracking-wider">
+              <a href={item.demo} target="_blank" rel="noopener noreferrer" className="hover:opacity-70">Demo</a>
+              <a href={item.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-70">GitHub</a>
+            </div>
+          </div>
+        ) : null}
         <ul className="flex flex-col gap-3 sm:gap-4 text-[#D7E2EA] font-light leading-relaxed" style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.2rem)' }}>
           {item.points.map(function (pt) {
             return <li key={pt} className="border-t border-[#D7E2EA]/15 pt-3 sm:pt-4">{pt}</li>;
