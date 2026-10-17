@@ -9,7 +9,7 @@ const ROW1 = [
   { k: 'Project  Oct 2026', t: 'Real-Time Auction', s: 'FastAPI  WebSockets  Redis Pub/Sub  PostgreSQL  Lua', href: 'https://tejashr0716.github.io/auction/', bg: 'linear-gradient(160deg, #1f1404 0%, #b45309 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'CineBox Ticketing', s: 'FastAPI  Redis  RabbitMQ  PostgreSQL  Tailwind', href: 'https://tejashr0716.github.io/cinebox/', bg: 'linear-gradient(160deg, #021a2e 0%, #0369a1 45%, #0C0C0C 100%)' },
   { k: 'Project  May 2026 -- Jul 2026', t: 'Flash Market', s: 'Python  FastAPI  MySQL  REST  JavaScript', href: 'https://github.com/tejashr0716/flashmarket', bg: 'linear-gradient(160deg, #1a1208 0%, #3d2a12 45%, #0C0C0C 100%)' },
-  { k: 'Project  Jan 2026 -- Feb 2026', t: 'Fleet Tracking', s: 'Python  FastAPI  PostgreSQL  Redis  REST', href: 'https://github.com/tejashr0716/fleet', bg: 'linear-gradient(160deg, #082018 0%, #0f3d32 45%, #0C0C0C 100%)' },
+  { k: 'Project  Oct 2026', t: 'FleetSync Platform', s: 'C++ Spatial SIMD  FastAPI  WebSockets  Redis GEO  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/fleetsync/', bg: 'linear-gradient(160deg, #061922 0%, #0d9488 45%, #0C0C0C 100%)' },
   { k: 'Project  Nov 2025 -- Dec 2025', t: 'PCA Reduction', s: 'Python  NumPy  pandas  scikit-learn  Matplotlib', href: 'https://github.com/tejashr0716/pca-dimension-reduction', bg: 'linear-gradient(160deg, #101018 0%, #2a2450 45%, #0C0C0C 100%)' },
 ];
 const ROW2 = [
