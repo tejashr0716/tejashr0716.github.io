@@ -3,6 +3,7 @@ const useEffect = window.useEffect;
 const useRef = window.useRef;
 
 const ROW1 = [
+  { k: 'Project  Oct 2026', t: 'GateKeeper Sentinel', s: 'C++ Token Bucket  FastAPI  Redis Lua  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/gatekeeper/', bg: 'linear-gradient(160deg, #091324 0%, #0891b2 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'ApexMatch Engine', s: 'C++ LMAX Disruptor  FastAPI  WebSockets  Redis  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/apex-match/', bg: 'linear-gradient(160deg, #041824 0%, #0284c7 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'FraudShield Telemetry', s: 'FastAPI  C++ SIMD  RabbitMQ  Redis  Spark  Azure SQL', href: 'https://tejashr0716.github.io/fraud-shield/', bg: 'linear-gradient(160deg, #1f0408 0%, #be123c 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'Real-Time Auction', s: 'FastAPI  WebSockets  Redis Pub/Sub  PostgreSQL  Lua', href: 'https://tejashr0716.github.io/auction/', bg: 'linear-gradient(160deg, #1f1404 0%, #b45309 45%, #0C0C0C 100%)' },
