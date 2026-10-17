@@ -3,13 +3,14 @@ const useEffect = window.useEffect;
 const useRef = window.useRef;
 
 const ROW1 = [
+  { k: 'Project  Oct 2026', t: 'CloudSentinel Engine', s: 'C++ SIMD Vectorized  FastAPI  WebSockets  Redis DB  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/cloudsentinel/', bg: 'linear-gradient(160deg, #061e2d 0%, #0284c7 45%, #0C0C0C 100%)' },
+  { k: 'Project  Oct 2026', t: 'FleetSync Platform', s: 'C++ Spatial SIMD  FastAPI  WebSockets  Redis GEO  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/fleetsync/', bg: 'linear-gradient(160deg, #061922 0%, #0d9488 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'GateKeeper Sentinel', s: 'C++ Token Bucket  FastAPI  Redis Lua  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/gatekeeper/', bg: 'linear-gradient(160deg, #091324 0%, #0891b2 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'ApexMatch Engine', s: 'C++ LMAX Disruptor  FastAPI  WebSockets  Redis  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/apex-match/', bg: 'linear-gradient(160deg, #041824 0%, #0284c7 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'FraudShield Telemetry', s: 'FastAPI  C++ SIMD  RabbitMQ  Redis  Spark  Azure SQL', href: 'https://tejashr0716.github.io/fraud-shield/', bg: 'linear-gradient(160deg, #1f0408 0%, #be123c 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'Real-Time Auction', s: 'FastAPI  WebSockets  Redis Pub/Sub  PostgreSQL  Lua', href: 'https://tejashr0716.github.io/auction/', bg: 'linear-gradient(160deg, #1f1404 0%, #b45309 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'CineBox Ticketing', s: 'FastAPI  Redis  RabbitMQ  PostgreSQL  Tailwind', href: 'https://tejashr0716.github.io/cinebox/', bg: 'linear-gradient(160deg, #021a2e 0%, #0369a1 45%, #0C0C0C 100%)' },
   { k: 'Project  May 2026 -- Jul 2026', t: 'Flash Market', s: 'Python  FastAPI  MySQL  REST  JavaScript', href: 'https://github.com/tejashr0716/flashmarket', bg: 'linear-gradient(160deg, #1a1208 0%, #3d2a12 45%, #0C0C0C 100%)' },
-  { k: 'Project  Oct 2026', t: 'FleetSync Platform', s: 'C++ Spatial SIMD  FastAPI  WebSockets  Redis GEO  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/fleetsync/', bg: 'linear-gradient(160deg, #061922 0%, #0d9488 45%, #0C0C0C 100%)' },
   { k: 'Project  Nov 2025 -- Dec 2025', t: 'PCA Reduction', s: 'Python  NumPy  pandas  scikit-learn  Matplotlib', href: 'https://github.com/tejashr0716/pca-dimension-reduction', bg: 'linear-gradient(160deg, #101018 0%, #2a2450 45%, #0C0C0C 100%)' },
 ];
 const ROW2 = [
