@@ -3,6 +3,7 @@ const useEffect = window.useEffect;
 const useRef = window.useRef;
 
 const ROW1 = [
+  { k: 'Project  Oct 2026', t: 'ChandyStore Raft', s: 'C++ Raft FSM  FastAPI  WebSockets  Redis DB  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/chandystore/', bg: 'linear-gradient(160deg, #10081c 0%, #7c3aed 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'RiskGrid Engine', s: 'C++ Monte Carlo  Greeks  FastAPI  WebSockets  Redis DB  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/riskgrid/', bg: 'linear-gradient(160deg, #1f1404 0%, #d97706 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'CloudSentinel Engine', s: 'C++ SIMD Vectorized  FastAPI  WebSockets  Redis DB  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/cloudsentinel/', bg: 'linear-gradient(160deg, #061e2d 0%, #0284c7 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'FleetSync Platform', s: 'C++ Spatial SIMD  FastAPI  WebSockets  Redis GEO  RabbitMQ  Spark', href: 'https://tejashr0716.github.io/fleetsync/', bg: 'linear-gradient(160deg, #061922 0%, #0d9488 45%, #0C0C0C 100%)' },
