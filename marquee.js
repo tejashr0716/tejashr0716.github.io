@@ -3,6 +3,7 @@ const useEffect = window.useEffect;
 const useRef = window.useRef;
 
 const ROW1 = [
+  { k: 'Project  Oct 2026', t: 'MarketSentinel Surveillance', s: 'C# .NET 8  C++ SIMD  FastAPI  WebSockets  Redis DB 10  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/market-sentinel/', bg: 'linear-gradient(160deg, #070e1c 0%, #00f0ff 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'SentinelTrust Auth', s: 'C++ Bloom Filter  FastAPI  WebSockets  Redis DB 8  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/sentineltrust/', bg: 'linear-gradient(160deg, #090e1f 0%, #00f0ff 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'StreamForge CDC', s: 'C++ FNV-1a Core  FastAPI  WebSockets  Redis DB 7  RabbitMQ  Spark Lakehouse  Postgres', href: 'https://tejashr0716.github.io/streamforge/', bg: 'linear-gradient(160deg, #05192d 0%, #0284c7 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'SyncCanvas CRDT', s: 'C++ CRDT Engine  FastAPI  WebSockets  Redis DB  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/synccanvas/', bg: 'linear-gradient(160deg, #091322 0%, #0284c7 45%, #0C0C0C 100%)' },
