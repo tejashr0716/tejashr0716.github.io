@@ -3,6 +3,16 @@ const useEffect = window.useEffect;
 const useRef = window.useRef;
 
 const ROW1 = [
+  { k: 'Live App  Oct 2026', t: 'ZoomDrive Mobility', s: 'TypeScript  React  NestJS  Redis Locks  PostgreSQL  Docker  Nginx', href: 'https://tejashr0716.github.io/zoomdrive/', bg: 'linear-gradient(160deg, #090e1f 0%, #6366f1 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'FlashCart Commerce', s: 'React  Node.js  Redis Atomic DECR  PostgreSQL  Docker  Jenkins', href: 'https://tejashr0716.github.io/flashcart/', bg: 'linear-gradient(160deg, #1f0408 0%, #f43f5e 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'PulseBed Healthcare', s: 'React  NestJS  PostgreSQL  Redis SSE  Prometheus  Docker', href: 'https://tejashr0716.github.io/pulsebed/', bg: 'linear-gradient(160deg, #061912 0%, #10b981 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'CareSlot Health', s: 'React  Node  Express  MongoDB  WebSockets  Nginx', href: 'https://tejashr0716.github.io/careslot/', bg: 'linear-gradient(160deg, #051a17 0%, #14b8a6 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'StockPulse Screener', s: 'React  Canvas Charts  NestJS  Redis Pub/Sub  PostgreSQL', href: 'https://tejashr0716.github.io/stockpulse/', bg: 'linear-gradient(160deg, #041824 0%, #0ea5e9 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'CryptoAlert Stream', s: 'React  Node  Redis Pub/Sub  MongoDB  Docker  Alertmanager', href: 'https://tejashr0716.github.io/cryptoalert/', bg: 'linear-gradient(160deg, #1f1404 0%, #f59e0b 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'SeatLock Cinema', s: 'React  NestJS  Redis SETNX Locks  PostgreSQL  Docker', href: 'https://tejashr0716.github.io/seatlock/', bg: 'linear-gradient(160deg, #130621 0%, #a855f7 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'MotoTrade P2P', s: 'React  Node  Express  MongoDB  Socket.io  Docker', href: 'https://tejashr0716.github.io/mototrade/', bg: 'linear-gradient(160deg, #1c0d03 0%, #f97316 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'StayHub Luxury', s: 'React  NestJS  MongoDB  Redis Cache  Docker  Jenkins', href: 'https://tejashr0716.github.io/stayhub/', bg: 'linear-gradient(160deg, #03170e 0%, #059669 45%, #0C0C0C 100%)' },
+  { k: 'Live App  Oct 2026', t: 'SmartPark IoT', s: 'React  NestJS  Redis Pub/Sub  MongoDB  Prometheus  Docker', href: 'https://tejashr0716.github.io/smartpark/', bg: 'linear-gradient(160deg, #05142b 0%, #2563eb 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'MarketSentinel Surveillance', s: 'C# .NET 8  C++ SIMD  FastAPI  WebSockets  Redis DB 10  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/market-sentinel/', bg: 'linear-gradient(160deg, #070e1c 0%, #00f0ff 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'SentinelTrust Auth', s: 'C++ Bloom Filter  FastAPI  WebSockets  Redis DB 8  RabbitMQ  Spark  Postgres', href: 'https://tejashr0716.github.io/sentineltrust/', bg: 'linear-gradient(160deg, #090e1f 0%, #00f0ff 45%, #0C0C0C 100%)' },
   { k: 'Project  Oct 2026', t: 'StreamForge CDC', s: 'C++ FNV-1a Core  FastAPI  WebSockets  Redis DB 7  RabbitMQ  Spark Lakehouse  Postgres', href: 'https://tejashr0716.github.io/streamforge/', bg: 'linear-gradient(160deg, #05192d 0%, #0284c7 45%, #0C0C0C 100%)' },
