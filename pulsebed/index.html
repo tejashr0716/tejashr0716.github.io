@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PulseBed Healthcare — Emergency ICU & Bed Telemetry Engine</title>
+  <title>PulseBed Healthcare — City-Wide Emergency ICU Bed Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -16,8 +16,8 @@
         extend: {
           colors: {
             brand: '#10b981',
-            darkbg: '#070b14',
-            cardbg: 'rgba(14, 22, 40, 0.75)',
+            darkbg: '#060a12',
+            cardbg: 'rgba(11, 19, 36, 0.75)',
             borderbg: 'rgba(255, 255, 255, 0.08)'
           },
           fontFamily: {
@@ -30,25 +30,28 @@
   </script>
   <style>
     body {
-      background-color: #070b14;
+      background-color: #060a12;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.8) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.18) 0px, transparent 45%),
+        radial-gradient(at 100% 100%, rgba(5, 150, 105, 0.12) 0px, transparent 50%),
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 24px 24px;
       color: #f1f5f9;
       min-height: 100vh;
     }
     .glass-card {
-      background: rgba(14, 22, 40, 0.75);
-      backdrop-filter: blur(14px);
+      background: rgba(11, 19, 36, 0.75);
+      backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
     .glass-card:hover {
-      border-color: rgba(16, 185, 129, 0.3);
+      border-color: rgba(16, 185, 129, 0.35);
     }
     .tab-btn.active {
-      background: #10b981;
+      background: linear-gradient(135deg, #059669, #10b981);
       color: #ffffff;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
     }
     .pulse-dot {
       animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -57,42 +60,59 @@
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.35; transform: scale(1.2); }
     }
+    .node-card {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .node-card:hover {
+      transform: translateY(-4px);
+      border-color: #10b981;
+      box-shadow: 0 12px 25px -5px rgba(16, 185, 129, 0.25);
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-brand selection:text-white flex flex-col min-h-screen">
 
+  <!-- Top Header -->
   <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 px-6 py-3.5 flex items-center justify-between">
     <div class="flex items-center gap-4">
-      <a href="https://tejashr0716.github.io/" class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-white shadow-lg shadow-emerald-600/30 transition hover:scale-105">
+      <a href="https://tejashr0716.github.io/" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-500 flex items-center justify-center font-bold text-white shadow-lg shadow-emerald-600/30 transition hover:scale-105">
         <i class="fa-solid fa-hospital text-lg"></i>
       </a>
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-extrabold text-lg text-white tracking-tight">PulseBed Healthcare</h1>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span> ICU TELEMETRY ACTIVE
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span> PROD ENGINE v2.4
           </span>
         </div>
-        <p class="text-xs text-slate-400">City-Wide Emergency ICU Bed Allocation · 15-Minute En-Route Ambulance Hold</p>
+        <p class="text-xs text-slate-400">Emergency ICU Bed Allocation · 15-Minute En-Route Ambulance Hold</p>
       </div>
     </div>
 
+    <!-- Center Navigation Tabs -->
     <div class="hidden md:flex items-center gap-1 bg-slate-950/80 p-1 border border-slate-800 rounded-xl text-xs font-semibold">
       <button onclick="switchTab('console')" id="tab-console" class="tab-btn active px-4 py-1.5 rounded-lg transition">
-        <i class="fa-solid fa-bed-pulse text-xs mr-1"></i> Live ICU Wards
+        <i class="fa-solid fa-sliders text-xs mr-1"></i> Live Operations
       </button>
-      <button onclick="switchTab('ambulance')" id="tab-ambulance" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
-        <i class="fa-solid fa-truck-medical text-xs mr-1"></i> Ambulance Hold Dispatch
+      <button onclick="switchTab('topology')" id="tab-topology" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
+        <i class="fa-solid fa-diagram-project text-xs mr-1"></i> System Topology
       </button>
-      <button onclick="switchTab('triage')" id="tab-triage" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
-        <i class="fa-solid fa-triangle-exclamation text-xs mr-1"></i> Mass Casualty Triage
+      <button onclick="switchTab('scenarios')" id="tab-scenarios" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
+        <i class="fa-solid fa-vial text-xs mr-1"></i> Concurrency Labs
       </button>
-      <button onclick="switchTab('architecture')" id="tab-architecture" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
-        <i class="fa-solid fa-database text-xs mr-1"></i> Architecture
+      <button onclick="switchTab('profiler')" id="tab-profiler" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
+        <i class="fa-solid fa-database text-xs mr-1"></i> SQL Profiler
+      </button>
+      <button onclick="switchTab('devops')" id="tab-devops" class="tab-btn px-4 py-1.5 text-slate-400 hover:text-white rounded-lg transition">
+        <i class="fa-solid fa-server text-xs mr-1"></i> DevOps Specs
       </button>
     </div>
 
+    <!-- Right Actions -->
     <div class="flex items-center gap-3">
+      <button onclick="toggleAudio()" id="btn-audio" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition" title="Toggle Sound Feedback">
+        <i class="fa-solid fa-volume-high text-xs"></i>
+      </button>
       <a href="https://github.com/tejashr0716/PulseBed-Hospital-ICU-Tracker" target="_blank" class="px-3.5 py-1.5 text-xs font-bold rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition flex items-center gap-1.5">
         <i class="fa-brands fa-github text-sm"></i> Source Code
       </a>
@@ -102,6 +122,7 @@
     </div>
   </header>
 
+  <!-- Main Content -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
 
     <!-- KPI Metrics -->
@@ -110,22 +131,26 @@
         <div class="flex items-center justify-between mb-2">
           <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Available ICU Beds</span>
           <div class="w-8 h-8 rounded-lg bg-emerald-950/60 border border-emerald-800/40 flex items-center justify-center text-emerald-400">
-            <i class="fa-solid fa-bed"></i>
+            <i class="fa-solid fa-bed-pulse"></i>
           </div>
         </div>
-        <div class="text-2xl font-black text-white font-mono" id="kpi-icu">14 Beds Open</div>
-        <div class="text-xs text-emerald-400 font-semibold mt-1">Across 4 City Wings</div>
+        <div class="text-2xl font-black text-white font-mono" id="kpi-beds">14 Beds Open</div>
+        <div class="text-xs text-emerald-400 font-semibold mt-1 flex items-center gap-1">
+          <i class="fa-solid fa-check"></i> Across 4 City Wings
+        </div>
       </div>
 
       <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">En-Route Ambulance Holds</span>
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ambulance Holds</span>
           <div class="w-8 h-8 rounded-lg bg-amber-950/60 border border-amber-800/40 flex items-center justify-center text-amber-400">
             <i class="fa-solid fa-truck-medical"></i>
           </div>
         </div>
         <div class="text-2xl font-black text-white font-mono" id="kpi-holds">3 In Transit</div>
-        <div class="text-xs text-amber-400 font-semibold mt-1">15-Min Hold Protocol</div>
+        <div class="text-xs text-amber-400 font-semibold mt-1 flex items-center gap-1">
+          <i class="fa-solid fa-stopwatch"></i> 15-Min Hold Protocol
+        </div>
       </div>
 
       <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
@@ -136,7 +161,9 @@
           </div>
         </div>
         <div class="text-2xl font-black text-white font-mono">82% Capacity</div>
-        <div class="text-xs text-cyan-400 font-semibold mt-1">Stable Pressure Output</div>
+        <div class="text-xs text-cyan-400 font-semibold mt-1 flex items-center gap-1">
+          <i class="fa-solid fa-gauge"></i> Stable Pressure Output
+        </div>
       </div>
 
       <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
@@ -147,46 +174,60 @@
           </div>
         </div>
         <div class="text-2xl font-black text-white font-mono">24 On Duty</div>
-        <div class="text-xs text-indigo-400 font-semibold mt-1">4 Intensivists Ready</div>
+        <div class="text-xs text-indigo-400 font-semibold mt-1 flex items-center gap-1">
+          <i class="fa-solid fa-stethoscope"></i> 4 Intensivists Ready
+        </div>
       </div>
     </div>
 
-    <!-- TAB 1: LIVE ICU CONSOLE -->
+    <!-- TAB 1: LIVE OPERATIONS CONSOLE -->
     <div id="view-console" class="space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
+        <!-- Beds Grid (2 Cols) -->
         <div class="lg:col-span-2 glass-card rounded-2xl p-6 space-y-5">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
             <div>
               <h2 class="text-base font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-heart-pulse text-emerald-400"></i> Active Hospital Beds Matrix
+                <i class="fa-solid fa-heart-pulse text-emerald-400"></i> Critical Care Wards & ICU Beds
               </h2>
-              <p class="text-xs text-slate-400">Click any bed to place an emergency hold or review vital stats</p>
+              <p class="text-xs text-slate-400">Select any vacant bed to initiate an atomic 15-minute emergency ambulance hold</p>
             </div>
-            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold">
-              WING A & B MONITORED
-            </span>
+            <!-- Live Protocol Badge -->
+            <div class="flex items-center gap-2 bg-emerald-950/50 px-3 py-1.5 border border-emerald-800/50 rounded-xl text-xs font-mono text-emerald-300">
+              <i class="fa-solid fa-satellite-dish pulse-dot text-emerald-400"></i>
+              <span>FHIR / HL7 TELEMETRY ACTIVE</span>
+            </div>
           </div>
 
           <!-- Beds Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="beds-container">
-            <!-- Injected via JS -->
-          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="beds-container"></div>
         </div>
 
-        <!-- Telemetry Audit -->
+        <!-- Real-Time Audit Ledger & Ambulance Hold Timer (1 Col) -->
         <div class="glass-card rounded-2xl p-6 flex flex-col h-full space-y-4">
           <div class="flex items-center justify-between pb-3 border-b border-slate-800">
             <h3 class="text-sm font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-terminal text-cyan-400"></i> Hospital Event Audit
+              <i class="fa-solid fa-terminal text-cyan-400"></i> Triage Dispatch Stream
             </h3>
             <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
           </div>
 
           <div id="event-stream" class="flex-1 space-y-2 overflow-y-auto max-h-[460px] font-mono text-xs pr-1">
             <div class="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-slate-300">
-              <span class="text-slate-500 text-[10px] block">15:40:00</span>
-              <span class="text-emerald-400 font-bold">[ICU_INIT]</span> City emergency hospital network active.
+              <span class="text-slate-500 text-[10px] block">15:53:14</span>
+              <span class="text-emerald-400 font-bold">[REDIS_BED]</span> ICU bed mutex shard online. 15-min TTL active.
+            </div>
+          </div>
+
+          <!-- Active En-Route Ambulance Hold Card -->
+          <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2 text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>Your En-Route Ambulance Hold:</span>
+              <span class="font-mono text-amber-400 font-bold" id="my-hold-timer">No Active Hold</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+              <div id="hold-progress" class="bg-amber-400 h-1.5 rounded-full transition-all duration-1000" style="width: 0%"></div>
             </div>
           </div>
         </div>
@@ -194,132 +235,481 @@
       </div>
     </div>
 
-    <!-- TAB 2: AMBULANCE DISPATCH -->
-    <div id="view-ambulance" class="hidden space-y-6">
-      <div class="glass-card rounded-2xl p-6 space-y-5">
-        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-truck-medical text-amber-400"></i> En-Route Ambulance Hold Reservation
-        </h2>
-        <p class="text-xs text-slate-400">Ambulances en-route can place an emergency 15-minute lock on an ICU bed before arrival.</p>
+    <!-- TAB 2: SYSTEM TOPOLOGY (INTERACTIVE NODE GRAPH) -->
+    <div id="view-topology" class="hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-diagram-project text-emerald-400"></i> Hospital Emergency Telemetry Topology
+          </h2>
+          <p class="text-xs text-slate-400">Click any system component below to inspect its operational metrics, protocols, and failover behavior.</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs uppercase text-slate-400 font-bold mb-1">Ambulance Call Sign</label>
-            <input type="text" id="amb-id" value="AMB-108-ALPHA" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- Node 1 -->
+          <div onclick="inspectNode('edge')" class="node-card cursor-pointer p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">Edge Tier</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <h4 class="font-bold text-white text-sm">FHIR / HL7 Ingress</h4>
+            <p class="text-xs text-slate-400">mTLS encrypted telemetry ingestion from ambulance edge modems.</p>
+            <div class="text-[10px] text-slate-500 font-mono">Port 8443 · HIPAA Compliant</div>
           </div>
-          <div>
-            <label class="block text-xs uppercase text-slate-400 font-bold mb-1">Triage Condition</label>
-            <select id="amb-triage" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-white">
-              <option>Acute STEMI (Heart Attack)</option>
-              <option>Severe Polytrauma</option>
-              <option>Acute Respiratory Distress (ARDS)</option>
-            </select>
+
+          <!-- Node 2 -->
+          <div onclick="inspectNode('gateway')" class="node-card cursor-pointer p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider font-mono">Triage Gateway</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Clinical Triage Router</h4>
+            <p class="text-xs text-slate-400">Scores incoming acuity (STEMI, Trauma) and routes to optimal ward.</p>
+            <div class="text-[10px] text-slate-500 font-mono">NestJS · Sub-millisecond Routing</div>
           </div>
-          <div class="flex items-end">
-            <button onclick="dispatchHold()" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-lg transition">
-              Dispatch 15-Min Hold
-            </button>
+
+          <!-- Node 3 -->
+          <div onclick="inspectNode('mutex')" class="node-card cursor-pointer p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">Bed Mutex</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Redis 7 Bed Hold Shard</h4>
+            <p class="text-xs text-slate-400">Atomic 15-min lease: SET lock:bed:ICU-A1 AMB-108 NX PX 900000.</p>
+            <div class="text-[10px] text-slate-500 font-mono">Port 6379 · Single-Holder Guarantee</div>
           </div>
+
+          <!-- Node 4 -->
+          <div onclick="inspectNode('db')" class="node-card cursor-pointer p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-400 uppercase tracking-wider font-mono">Clinical DB</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <h4 class="font-bold text-white text-sm">PostgreSQL 15 Medical DB</h4>
+            <p class="text-xs text-slate-400">Patient electronic health records (EHR), bed sensors, nurse notes.</p>
+            <div class="text-[10px] text-slate-500 font-mono">Port 5432 · AES-256 Tablespace</div>
+          </div>
+
+          <!-- Node 5 -->
+          <div onclick="inspectNode('alert')" class="node-card cursor-pointer p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">Intensivist Pager</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <h4 class="font-bold text-white text-sm">ICU Station Alert Pager</h4>
+            <p class="text-xs text-slate-400">WebSockets and MQTT push immediate audio chimes to on-duty doctors.</p>
+            <div class="text-[10px] text-slate-500 font-mono">Sub-15ms Notification Delivery</div>
+          </div>
+
+          <!-- Node 6 -->
+          <div onclick="inspectNode('backup')" class="node-card cursor-pointer p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono">Disaster Recovery</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </div>
+            <h4 class="font-bold text-white text-sm">AES-256 Medical Archiver</h4>
+            <p class="text-xs text-slate-400">Continuous encrypted WAL replication with automated weekly restore test.</p>
+            <div class="text-[10px] text-slate-500 font-mono">Zero Data Loss Target (RPO &lt; 1s)</div>
+          </div>
+        </div>
+
+        <div id="node-inspector" class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300">
+          <span class="text-emerald-400 font-bold uppercase tracking-wider text-[11px] block mb-1">Topology Node Inspector:</span>
+          Click any architecture node above to reveal its high-availability configuration and live telemetry.
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: MASS CASUALTY -->
-    <div id="view-triage" class="hidden space-y-6">
-      <div class="glass-card rounded-2xl p-6 space-y-5">
-        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> Mass-Casualty Disaster Triage Protocol
-        </h2>
-        <p class="text-xs text-slate-400">Simulate hospital Code Black response to industrial disasters or highway collisions.</p>
-        <button onclick="triggerCodeBlack()" class="px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-xl flex items-center gap-2">
-          <i class="fa-solid fa-bell"></i> Trigger Code Black Emergency Surge
-        </button>
+    <!-- TAB 3: CONCURRENCY LABS (SCENARIOS) -->
+    <div id="view-scenarios" class="hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-vial text-emerald-400"></i> Emergency Ambulance Bed Collision Lab
+          </h2>
+          <p class="text-xs text-slate-400">Simulate dual ambulance race conditions, hold expirations, and hospital gas pressure failover.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 space-y-3">
+            <h4 class="font-bold text-sm text-white flex items-center gap-2">
+              <i class="fa-solid fa-bolt text-amber-400"></i> Dual Ambulance Race
+            </h4>
+            <p class="text-xs text-slate-400">Simulates Ambulance 108 and Ambulance 102 locking the exact same ICU bed simultaneously.</p>
+            <button onclick="simulateDualAmbulanceRace()" class="w-full py-2 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/40 hover:bg-amber-500/30 text-xs font-bold transition">
+              Fire Dual Ambulance Requests
+            </button>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 space-y-3">
+            <h4 class="font-bold text-sm text-white flex items-center gap-2">
+              <i class="fa-solid fa-clock-rotate-left text-rose-400"></i> 15-Min Hold Expiration
+            </h4>
+            <p class="text-xs text-slate-400">Simulates ambulance rerouting; verifies that the held bed automatically frees up after 15 mins.</p>
+            <button onclick="simulateHoldExpiry()" class="w-full py-2 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 hover:bg-rose-500/30 text-xs font-bold transition">
+              Simulate 15-Min Expiry
+            </button>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 space-y-3">
+            <h4 class="font-bold text-sm text-white flex items-center gap-2">
+              <i class="fa-solid fa-lungs text-cyan-400"></i> Oxygen Line Failover
+            </h4>
+            <p class="text-xs text-slate-400">Simulates a pressure manifold alert, automatically tripping the backup oxygen reservoir in 200ms.</p>
+            <button onclick="simulateOxygenFailover()" class="w-full py-2 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 hover:bg-cyan-500/30 text-xs font-bold transition">
+              Trigger Manifold Trip
+            </button>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs space-y-2">
+          <div class="text-slate-400 font-bold uppercase tracking-wider text-[11px]">Lab Execution Trace:</div>
+          <div id="lab-output" class="text-slate-300">Ready for scenario execution. Click any button above to test emergency bed locking mechanics.</div>
+        </div>
       </div>
     </div>
 
-    <!-- TAB 4: ARCHITECTURE -->
-    <div id="view-architecture" class="hidden space-y-6">
-      <div class="glass-card rounded-2xl p-6 space-y-4">
-        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-database text-emerald-400"></i> Hospital Bed Telemetry Schema
-        </h2>
-        <pre class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 overflow-x-auto"><code>CREATE TABLE hospital_beds (
-    bed_id VARCHAR(32) PRIMARY KEY,
-    ward_name VARCHAR(64) NOT NULL,
-    ventilator_attached BOOLEAN DEFAULT FALSE,
-    status VARCHAR(32) DEFAULT 'AVAILABLE', -- AVAILABLE, OCCUPIED, HELD
-    current_patient_id VARCHAR(64),
-    vitals JSONB -- { bpm: 78, spo2: 98, map: 85 }
-);</code></pre>
+    <!-- TAB 4: SQL PROFILER (EXPLAIN ANALYZE) -->
+    <div id="view-profiler" class="hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-database text-cyan-400"></i> Bitmap Index Bed Allocation Profiler
+          </h2>
+          <p class="text-xs text-slate-400">Profile PostgreSQL queries identifying beds with active ventilators and available status.</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400 font-bold uppercase">SQL Query:</span>
+            <button onclick="runExplainAnalyze()" class="px-3.5 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg">
+              <i class="fa-solid fa-play text-[10px]"></i> Run EXPLAIN ANALYZE
+            </button>
+          </div>
+          <pre class="text-xs font-mono text-cyan-300 bg-slate-900/80 p-3 rounded-lg border border-slate-800"><code>SELECT bed_id, ward_name, vitals 
+FROM hospital_beds 
+WHERE status = 'AVAILABLE' AND ventilator_attached = TRUE;</code></pre>
+        </div>
+
+        <div id="profiler-output" class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs text-slate-300 space-y-1">
+          <span class="text-slate-500 italic">Click 'Run EXPLAIN ANALYZE' to profile the query planner tree.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: DEVOPS & CI/CD SPECS -->
+    <div id="view-devops" class="hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-server text-emerald-400"></i> Hardened DevOps & Recovery Specifications
+          </h2>
+          <p class="text-xs text-slate-400">Multi-stage Docker, declarative Jenkinsfile, and verified disaster recovery.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-3">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">REST API Explorer (Copy cURL)</h3>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-mono text-emerald-400 font-bold">POST /v1/ambulance-hold</span>
+                <button onclick="copyCurl()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] font-mono">
+                  <i class="fa-solid fa-copy mr-1"></i> Copy cURL
+                </button>
+              </div>
+              <pre class="text-[11px] font-mono text-slate-400 overflow-x-auto p-2 bg-slate-900 rounded"><code>curl -X POST https://api.pulsebed.org/v1/ambulance-hold \
+  -H "Content-Type: application/json" \
+  -d '{"ambulanceId":"AMB-108","triage":"STEMI"}'</code></pre>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Verified Backup & Recovery Principle</h3>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2 text-xs text-slate-300">
+              <p>Addresses Gway Tech principle: <em class="text-amber-400">"A backup is useful only when it can be restored."</em></p>
+              <ul class="list-disc list-inside text-slate-400 space-y-1 text-[11px]">
+                <li>HIPAA encrypted pg_dump with OpenSSL AES-256-CBC cipher</li>
+                <li>Zero-data loss Write-Ahead Logging (WAL) streaming</li>
+                <li>Weekly automated restore verification executes in sandbox container</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
   </main>
 
+  <!-- Interactive Ambulance Hold Modal -->
+  <div id="hold-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-card rounded-2xl max-w-lg w-full p-6 space-y-4 border border-slate-700 shadow-2xl animate-in fade-in">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-base font-bold text-white flex items-center gap-2" id="modal-bed-title">
+          <i class="fa-solid fa-truck-medical text-emerald-400"></i> En-Route Ambulance Hold
+        </h3>
+        <button onclick="closeHoldModal()" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs" id="modal-bed-details"></div>
+
+      <div class="space-y-2 text-xs">
+        <label class="block text-slate-400 font-semibold">Triage Classification:</label>
+        <select id="triage-select" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+          <option value="STEMI (Acute Myocardial Infarction)">Code STEMI (Acute Myocardial Infarction)</option>
+          <option value="Poly-Trauma / Severe Hemorrhage">Code Red (Poly-Trauma / Severe Hemorrhage)</option>
+          <option value="Acute Ischemic Stroke">Code Stroke (Thrombolysis Candidate)</option>
+          <option value="Severe ARDS (Ventilator Required)">Code Blue (Severe ARDS / Intubation)</option>
+        </select>
+      </div>
+
+      <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 space-y-1.5 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-300">Ambulance Identifier:</span>
+          <span class="font-mono font-bold text-emerald-400">AMB-108 (Central GPS)</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-slate-300">Lock Guarantee Duration:</span>
+          <span class="font-mono font-bold text-white">15 Minutes Guaranteed</span>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-slate-800 flex items-center justify-end gap-2">
+        <button onclick="closeHoldModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
+          Cancel
+        </button>
+        <button id="btn-confirm-hold" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/30">
+          Acquire 15-Min Bed Hold
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const BEDS = [
-      { id: "ICU-A1", ward: "Cardiac Wing A", type: "Ventilator + Telemetry", status: "Available", doctor: "Dr. Sarah Chen, MD", bpm: 78, spo2: 98 },
-      { id: "ICU-A2", ward: "Cardiac Wing A", type: "Ventilator + Telemetry", status: "Occupied", doctor: "Dr. Sarah Chen, MD", bpm: 82, spo2: 96 },
-      { id: "ICU-B1", ward: "Trauma Wing B", type: "High-Flow Oxygen", status: "Emergency Hold", doctor: "Dr. Robert Vance, MD", bpm: 90, spo2: 94 },
-      { id: "ICU-B2", ward: "Trauma Wing B", type: "High-Flow Oxygen", status: "Available", doctor: "Dr. Robert Vance, MD", bpm: 72, spo2: 99 },
-      { id: "ICU-C1", ward: "Neuro Wing C", type: "Intracranial Monitor", status: "Available", doctor: "Dr. Emily Taylor, MD", bpm: 76, spo2: 98 },
-      { id: "ICU-C2", ward: "Neuro Wing C", type: "Intracranial Monitor", status: "Occupied", doctor: "Dr. Emily Taylor, MD", bpm: 85, spo2: 95 }
+      { id: "ICU-A1", ward: "Trauma ICU Wing A", status: "Available", vent: true, spo2: 98, hr: 72, bp: "120/80", nurse: "Sister Clara", tag: "VENTILATOR READY" },
+      { id: "CCU-B2", ward: "Cardiac Care Unit B", status: "Available", vent: true, spo2: 96, hr: 80, bp: "135/88", nurse: "Nurse David", tag: "DEFIB SYNCED" },
+      { id: "NICU-C1", ward: "Neuro ICU Wing C", status: "Occupied", vent: true, spo2: 95, hr: 88, bp: "140/92", nurse: "Sister Mary", tag: "PT #8821 ADMITTED" },
+      { id: "PICU-D3", ward: "Pediatric ICU Wing D", status: "Available", vent: false, spo2: 99, hr: 110, bp: "105/65", nurse: "Nurse Anita", tag: "INCUBATOR READY" }
     ];
 
     let beds = [...BEDS];
+    let activeHoldBedId = null;
+    let holdTimerSeconds = 900;
+    let timerInterval = null;
+    let audioEnabled = true;
+
+    // Web Audio Synthesizer
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq = 520, type = 'sine', duration = 0.08) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      document.getElementById("btn-audio").innerHTML = audioEnabled ? '<i class="fa-solid fa-volume-high text-xs"></i>' : '<i class="fa-solid fa-volume-xmark text-xs text-rose-400"></i>';
+    }
 
     function renderBeds() {
       const container = document.getElementById("beds-container");
-      container.innerHTML = beds.map(bed => `
-        <div class="rounded-xl border border-slate-800 p-4 space-y-3 bg-slate-950/40 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between">
-            <span class="font-mono font-bold text-sm text-white">${bed.id}</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${bed.status === 'Available' ? 'bg-emerald-500/20 text-emerald-400' : (bed.status === 'Emergency Hold' ? 'bg-amber-500/20 text-amber-400' : 'bg-rose-500/20 text-rose-400')}">
-              ${bed.status}
-            </span>
+      container.innerHTML = beds.map(bed => {
+        const isHeld = bed.status === 'Held';
+        const isOccupied = bed.status === 'Occupied';
+        const isMine = activeHoldBedId === bed.id;
+
+        return `
+          <div class="rounded-xl border border-slate-800/80 bg-slate-950/40 p-4 space-y-3 hover:border-slate-700 transition">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-900 border border-slate-800 text-slate-300">
+                  ${bed.id}
+                </span>
+                <h4 class="font-bold text-sm text-white mt-1">${bed.ward}</h4>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${isHeld ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40' : (isOccupied ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40')}">
+                ${isMine ? '🚑 HELD FOR AMB-108' : bed.status}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 py-2 px-3 rounded-lg bg-slate-900/60 border border-slate-800/60 text-center font-mono">
+              <div>
+                <span class="text-[10px] text-slate-500 block">SpO2</span>
+                <span class="text-xs font-bold text-emerald-400">${bed.spo2}%</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 block">PULSE</span>
+                <span class="text-xs font-bold text-cyan-400">${bed.hr} bpm</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 block">NIBP</span>
+                <span class="text-xs font-bold text-slate-300">${bed.bp}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] text-slate-400">
+              <span><i class="fa-solid fa-lungs text-cyan-400 mr-1"></i> ${bed.vent ? 'Ventilator Online' : 'Standard O2'}</span>
+              <span><i class="fa-solid fa-user-nurse mr-1"></i> ${bed.nurse}</span>
+            </div>
+
+            <button onclick="openHoldModal('${bed.id}')" 
+                    ${(isHeld || isOccupied) ? 'disabled class="w-full py-2 rounded-xl text-xs font-bold text-slate-500 bg-slate-900 cursor-not-allowed"' : 'class="w-full py-2 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 transition shadow-lg shadow-emerald-600/30"'}>
+              <i class="fa-solid fa-truck-medical mr-1"></i> ${isMine ? 'Hold Active (15:00)' : (isHeld ? 'Locked by Incoming Ambulance' : (isOccupied ? 'Bed Currently Occupied' : 'Hold Bed for Ambulance (15 Min)'))}
+            </button>
           </div>
-          <div>
-            <p class="text-xs font-semibold text-slate-300">${bed.ward}</p>
-            <p class="text-[11px] text-slate-500">${bed.type}</p>
-            <p class="text-[10px] text-slate-400 font-mono mt-1">HR: ${bed.bpm} bpm · SpO2: ${bed.spo2}%</p>
+        `;
+      }).join('');
+    }
+
+    function openHoldModal(bedId) {
+      playBeep(640);
+      const bed = beds.find(b => b.id === bedId);
+      if (!bed) return;
+
+      document.getElementById("modal-bed-title").innerHTML = `<i class="fa-solid fa-truck-medical text-emerald-400"></i> Reserve ${bed.id} (${bed.ward})`;
+      document.getElementById("modal-bed-details").innerHTML = `
+        <div class="space-y-2">
+          <p class="text-slate-300">Locking <strong>${bed.id}</strong> in <strong>${bed.ward}</strong>.</p>
+          <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-400">
+            <div>Ventilator: <strong class="text-emerald-400">${bed.vent ? 'Attached & Pre-calibrated' : 'Standard Mask'}</strong></div>
+            <div>Assigned Nurse: <strong class="text-white">${bed.nurse}</strong></div>
           </div>
-          <button onclick="holdBed('${bed.id}')" 
-                  ${bed.status !== 'Available' ? 'disabled class="w-full py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-600 cursor-not-allowed"' : 'class="w-full py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition"'}>
-            ${bed.status === 'Available' ? 'Hold for Ambulance' : 'Occupied / Held'}
-          </button>
         </div>
-      `).join('');
+      `;
+      document.getElementById("hold-modal").classList.remove("hidden");
+      document.getElementById("btn-confirm-hold").onclick = () => acquireHold(bed.id);
     }
 
-    function holdBed(id) {
-      const b = beds.find(x => x.id === id);
-      b.status = "Emergency Hold";
+    function closeHoldModal() {
+      document.getElementById("hold-modal").classList.add("hidden");
+    }
+
+    function acquireHold(bedId) {
+      playBeep(880, 'sine', 0.15);
+      activeHoldBedId = bedId;
+      const bed = beds.find(b => b.id === bedId);
+      bed.status = "Held";
+      closeHoldModal();
       renderBeds();
-      logEvent("EMERGENCY_HOLD", `Bed ${id} reserved for incoming ambulance. 15-min countdown.`, "text-amber-400");
-      alert(`Emergency Hold active on ${id}! Hospital team dispatched to ER triage.`);
+
+      const triage = document.getElementById("triage-select").value;
+      logEvent("BED_HOLD", `Locked ${bedId} for incoming Ambulance AMB-108. Protocol: ${triage}.`, "text-amber-400");
+      startHoldTimer();
     }
 
-    function dispatchHold() {
-      const id = document.getElementById("amb-id").value;
-      const triage = document.getElementById("amb-triage").value;
-      const target = beds.find(x => x.status === "Available");
-      if (!target) {
-        alert("CRITICAL: All ICU beds occupied! Re-routing ambulance.");
-        return;
-      }
-      target.status = "Emergency Hold";
+    function startHoldTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      holdTimerSeconds = 900;
+      const timerLabel = document.getElementById("my-hold-timer");
+      const progress = document.getElementById("hold-progress");
+
+      timerInterval = setInterval(() => {
+        holdTimerSeconds--;
+        const mins = Math.floor(holdTimerSeconds / 60);
+        const secs = holdTimerSeconds % 60;
+        timerLabel.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs} Remaining`;
+        progress.style.width = `${(holdTimerSeconds / 900) * 100}%`;
+
+        if (holdTimerSeconds <= 0) {
+          clearInterval(timerInterval);
+          releaseHold("EXPIRED");
+        }
+      }, 1000);
+    }
+
+    function releaseHold(reason) {
+      if (!activeHoldBedId) return;
+      const bed = beds.find(b => b.id === activeHoldBedId);
+      if (bed) bed.status = "Available";
+      logEvent("HOLD_RELEASE", `Hold on ${activeHoldBedId} released (${reason}). Returned to ward pool.`, "text-emerald-400");
+      activeHoldBedId = null;
+      document.getElementById("my-hold-timer").innerText = "No Active Hold";
+      document.getElementById("hold-progress").style.width = "0%";
       renderBeds();
-      logEvent("AMB_DISPATCH", `${id} reserved ${target.id} for ${triage}. ETA 6 mins.`, "text-emerald-400");
-      alert(`Bed ${target.id} reserved for ${id}!`);
     }
 
-    function triggerCodeBlack() {
-      logEvent("CODE_BLACK", "CRITICAL: Mass-casualty triage active. Surge capacity beds unlocked.", "text-rose-500");
-      alert("🚨 CODE BLACK TRIGGERED! Hospital surge protocols active.");
+    function inspectNode(type) {
+      playBeep(520);
+      const inspector = document.getElementById("node-inspector");
+      const nodes = {
+        edge: { title: "FHIR / HL7 Telemetry Gateway", spec: "mTLS TLS 1.3 handshake with emergency vehicles. Parses real-time SpO2, ECG, and blood pressure telemetry streams." },
+        gateway: { title: "Clinical Triage Router", spec: "Processes 2,400 emergency holds/hour. High-priority thread scheduler prevents queuing delays for Code STEMI / Trauma." },
+        mutex: { title: "Redis 7 Bed Hold Mutex", spec: "Atomic lock: SET lock:bed:ICU-A1 AMB-108 NX PX 900000. Exactly one ambulance can hold a bed at any instant." },
+        db: { title: "PostgreSQL 15 Medical DB", spec: "Partitioned tables for EHR vitals history. pg_crypto column encryption for patient HIPAA compliance." },
+        alert: { title: "Intensivist Pager Service", spec: "Pub/Sub broadcasts to nursing stations, overhead triage displays, and intensivist pagers within 15 milliseconds." },
+        backup: { title: "AES-256 Disaster Recovery", spec: "Automated nightly pg_dump encrypted with 256-bit AES. Weekly automated sandbox restore test verification." }
+      };
+      const n = nodes[type];
+      inspector.innerHTML = `
+        <span class="text-emerald-400 font-bold uppercase tracking-wider text-[11px] block mb-1">${n.title}</span>
+        ${n.spec}
+      `;
+    }
+
+    function runExplainAnalyze() {
+      playBeep(720);
+      const out = document.getElementById("profiler-output");
+      out.innerHTML = `
+        <div class="text-emerald-400 font-bold">[POSTGRES QUERY PLANNER EXPLAIN ANALYZE]</div>
+        <div class="text-slate-300">-> Bitmap Heap Scan on hospital_beds (cost=4.20..12.35 rows=4 width=120) (actual time=0.042..0.049 rows=4 loops=1)</div>
+        <div class="text-slate-400">   Recheck Cond: (status = 'AVAILABLE'::text)</div>
+        <div class="text-slate-400">   Filter: (ventilator_attached = true)</div>
+        <div class="text-slate-400">   Buffers: shared hit=2</div>
+        <div class="text-cyan-400 font-bold pt-1">Planning Time: 0.082 ms | Execution Time: 0.054 ms (Sequential Scan Avoided!)</div>
+      `;
+      logEvent("SQL_EXPLAIN", "Executed EXPLAIN ANALYZE on hospital_beds: 0.054ms execution time.", "text-cyan-400");
+    }
+
+    function copyCurl() {
+      playBeep(800);
+      const curl = `curl -X POST https://api.pulsebed.org/v1/ambulance-hold -H "Content-Type: application/json" -d '{"ambulanceId":"AMB-108","triage":"STEMI"}'`;
+      navigator.clipboard.writeText(curl);
+      alert("cURL command copied to clipboard!");
+    }
+
+    function simulateDualAmbulanceRace() {
+      playBeep(440, 'square', 0.15);
+      const log = document.getElementById("lab-output");
+      log.innerHTML = `
+        <span class="text-amber-400">Ambulance #108 (ETA 6m):</span> Transmits hold request for ICU-A1 at 15:54:02.100 ... <span class="text-emerald-400">MUTEX GRANTED (15-min hold locked)</span><br>
+        <span class="text-cyan-400">Ambulance #102 (ETA 9m):</span> Transmits hold request for ICU-A1 at 15:54:02.102 (+2ms) ... <span class="text-rose-400">HTTP 409 CONFLICT (Bed Already Held)</span><br>
+        <span class="text-emerald-400 font-bold">FAILOVER ROUTER: Ambulance #102 instantly re-routed to CCU-B2 (Cardiac Care Unit). Zero critical care delay.</span>
+      `;
+      logEvent("RACE_TEST", "Dual ambulance collision resolved. Mutex held, secondary vehicle routed.", "text-rose-400");
+    }
+
+    function simulateHoldExpiry() {
+      playBeep(330, 'triangle', 0.15);
+      if (!activeHoldBedId) acquireHold("ICU-A1");
+      holdTimerSeconds = 3;
+      logEvent("TTL_EXPIRY", "Forced hold TTL expiration. Bed releasing in 3 seconds...", "text-amber-400");
+    }
+
+    function simulateOxygenFailover() {
+      playBeep(660);
+      const log = document.getElementById("lab-output");
+      log.innerHTML = `
+        <span class="text-rose-400 font-bold">Primary Oxygen Pressure Drop Alert:</span> Line 2 pressure dropped to 38 PSI (Threshold: 45 PSI).<br>
+        <span class="text-emerald-400">Automated Solenoid Trip:</span> Secondary liquid O2 manifold engaged in 180ms. Line pressure restored to 52 PSI. Patient ventilators undisturbed.
+      `;
+      logEvent("OXYGEN_FAILOVER", "Manifold 2 auto-tripped. Line pressure stabilized at 52 PSI.", "text-cyan-400");
     }
 
     function switchTab(tabId) {
-      ['console', 'ambulance', 'triage', 'architecture'].forEach(t => {
+      playBeep(480);
+      ['console', 'topology', 'scenarios', 'profiler', 'devops'].forEach(t => {
         document.getElementById('view-' + t).classList.add('hidden');
         document.getElementById('tab-' + t).classList.remove('active');
       });
@@ -337,10 +727,15 @@
       stream.prepend(div);
     }
 
+    // Auto Periodic Events
     setInterval(() => {
-      const vitals = ["Patient ICU-A2 SpO2: 97%", "Ventilator Mode PRVC: Stable 450ml", "Cardiac telemetry steady: 76 bpm"];
-      const v = vitals[Math.floor(Math.random() * vitals.length)];
-      logEvent("TELEMETRY", v, "text-cyan-400");
+      const telemetry = [
+        ["VITALS_SYNC", "Telemetry ping from CCU-B2: Pulse 80 bpm, SpO2 96%.", "text-slate-400"],
+        ["OXYGEN_PRESSURE", "Main line O2 manifold pressure: 54.2 PSI (Nominal).", "text-emerald-400"],
+        ["INTENSIVIST_ROSTER", "Dr. Mehta signed on as Trauma Wing lead intensivist.", "text-cyan-400"]
+      ];
+      const t = telemetry[Math.floor(Math.random() * telemetry.length)];
+      logEvent(t[0], t[1], t[2]);
     }, 4500);
 
     renderBeds();
